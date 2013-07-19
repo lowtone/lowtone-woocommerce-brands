@@ -52,7 +52,11 @@ namespace lowtone\woocommerce\brands {
 								"new_item_name" => __("New Brand Name", "lowtone_woocommerce_brands")
 							),
 							"rewrite" => array("slug" => slug()),
-							"hierarchical" => false
+							"hierarchical" => false,
+							"public" => true,
+							"show_ui" => true,
+							"show_in_nav_menus" => true,
+							"show_admin_column" => false,
 						)
 					);
 
@@ -80,18 +84,35 @@ namespace lowtone\woocommerce\brands {
 							"hide_empty" => false,
 						);
 
+					$terms = array("" => "");
+
 					foreach (get_terms("product_brand", $args) as $term) 
 						$terms[$term->term_id] = $term->name;
 
+					global $post;
+
+					$brand = reset(wp_get_post_terms($post->ID, "product_brand"));
+
 					woocommerce_wp_select(array(
-							"id" => "tax_input[product_brand][]", 
+							"id" => "lowtone_woocommerce_brand", 
 							"label" => __("Brand", "lowtone_woocommerce_brands"), 
-							"options" => $terms
+							"options" => $terms, 
+							"value" => $brand ? $brand->term_id : NULL
 						));
 
 					echo '</div>';
 
 				});
+
+				add_action("save_post", function($id, $post) {
+					if ("product" != $post->post_type)
+						return;
+
+					if (!isset($_POST["lowtone_woocommerce_brand"]))
+						return;
+
+					wp_set_object_terms($id, (int) $_POST["lowtone_woocommerce_brand"], "product_brand", false);
+				}, 10, 2);
 
 				add_action("woocommerce_archive_description", function() {
 					if (!(is_tax(array("product_brand")) && 0 == get_query_var("paged"))) 
