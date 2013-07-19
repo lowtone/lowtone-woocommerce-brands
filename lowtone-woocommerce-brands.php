@@ -51,10 +51,22 @@ namespace lowtone\woocommerce\brands {
 								"add_new_item" => __("Add New Brand", "lowtone_woocommerce_brands"),
 								"new_item_name" => __("New Brand Name", "lowtone_woocommerce_brands")
 							),
-							"rewrite" => array("slug" => "product-brand"),
+							"rewrite" => array("slug" => slug()),
 							"hierarchical" => false
 						)
 					);
+
+					add_filter("body_class", function($class) {
+						global $wp_query;
+
+						if ("product_brand" != $wp_query->get("taxonomy"))
+							return $class;
+
+						$class[] = "woocommerce";
+						$class[] = "woocommerce-page";
+
+						return $class;
+					});
 
 				});
 
@@ -81,7 +93,51 @@ namespace lowtone\woocommerce\brands {
 
 				});
 
+				add_action("woocommerce_archive_description", function() {
+					if (!(is_tax(array("product_brand")) && 0 == get_query_var("paged"))) 
+						return;
+
+					$description = apply_filters("the_content", term_description());
+						
+					if (!$description) 
+						return;
+
+					echo '<div class="term-description">' . $description . '</div>';
+				});
+
+				add_action("admin_init", function() {
+
+					add_settings_field(
+						"lowtone_woocommerce_brands_slug",
+						__("Product brand base", "lowtone_woocommerce_brands"),
+						function() {
+							echo sprintf('<input name="lowtone_woocommerce_brands_slug" type="text" class="regular-text code" value="%s" />', esc_attr(slug()));
+						},
+						"permalink",
+						"optional"
+					);
+
+				}, 20);
+
+				add_action("before_woocommerce_init", function() {
+					if (!is_admin())
+						return;
+
+					if (!isset($_POST["lowtone_woocommerce_brands_slug"]))
+						return;
+
+					$slug = untrailingslashit($_POST["lowtone_woocommerce_brands_slug"]);
+
+					update_option("lowtone_woocommerce_brands_slug", $slug);
+				});
+
 			}
 		));
+
+	// Functions
+	
+	function slug() {
+		return trim(get_option("lowtone_woocommerce_brands_slug")) ?: "brand";
+	}
 
 }
