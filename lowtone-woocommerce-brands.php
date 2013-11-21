@@ -72,7 +72,7 @@ namespace lowtone\woocommerce\brands {
 						return $class;
 					});
 
-				});
+				}, 0);
 
 				add_action("woocommerce_product_options_general_product_data", function() {
 
@@ -140,6 +140,14 @@ namespace lowtone\woocommerce\brands {
 
 				}, 20);
 
+				// Remove meta box
+				
+				add_action("admin_menu", function() {
+					remove_meta_box("tagsdiv-product_brand", "product", "side");
+				});
+
+				// Save slug
+
 				add_action("before_woocommerce_init", function() {
 					if (!is_admin())
 						return;
@@ -150,6 +158,12 @@ namespace lowtone\woocommerce\brands {
 					$slug = untrailingslashit($_POST["lowtone_woocommerce_brands_slug"]);
 
 					update_option("lowtone_woocommerce_brands_slug", $slug);
+				});
+				
+				// Register textdomain
+	
+				add_action("plugins_loaded", function() {
+					load_plugin_textdomain("lowtone_woocommerce_brands", false, basename(__DIR__) . "/assets/languages");
 				});
 
 			}

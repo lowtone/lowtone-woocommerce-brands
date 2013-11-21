@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Brands for WooCommerce\n"
+"POT-Creation-Date: 2013-08-16 15:59+0100\n"
+"PO-Revision-Date: 2013-08-16 16:02+0100\n"
+"Last-Translator: Paul van der Meijs <info@lowtone.nl>\n"
+"Language-Team: Lowtone <info@lowtone.nl>\n"
+"Language: Dutch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ../..\n"
+
+#: ../../lowtone-woocommerce-brands.php:40
+#: ../../lowtone-woocommerce-brands.php:42
+#: ../../lowtone-woocommerce-brands.php:44
+msgid "Brands"
+msgstr "Merken"
+
+#: ../../lowtone-woocommerce-brands.php:43
+#: ../../lowtone-woocommerce-brands.php:98
+msgid "Brand"
+msgstr "Merk"
+
+#: ../../lowtone-woocommerce-brands.php:45
+msgid "Search Brands"
+msgstr "Merk zoeken"
+
+#: ../../lowtone-woocommerce-brands.php:46
+msgid "All Brands"
+msgstr "Alle merken"
+
+#: ../../lowtone-woocommerce-brands.php:47
+msgid "Parent Brand"
+msgstr "Bovenliggend merk"
+
+#: ../../lowtone-woocommerce-brands.php:48
+msgid "Parent Brand:"
+msgstr "Bovenliggend merk:"
+
+#: ../../lowtone-woocommerce-brands.php:49
+msgid "Edit Brand"
+msgstr "Merk bewerken"
+
+#: ../../lowtone-woocommerce-brands.php:50
+msgid "Update Brand"
+msgstr "Merk bijwerken"
+
+#: ../../lowtone-woocommerce-brands.php:51
+msgid "Add New Brand"
+msgstr "Nieuw merk"
+
+#: ../../lowtone-woocommerce-brands.php:52
+msgid "New Brand Name"
+msgstr "Nieuwe merknaam"
+
+#: ../../lowtone-woocommerce-brands.php:133
+msgid "Product brand base"
+msgstr "Merkbasis"
